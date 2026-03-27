@@ -1,10 +1,12 @@
-# Graph-Based Data Modeling and Query System
+An end-to-end system that transforms fragmented enterprise data into a **connected graph** and enables users to query it using **natural language**.
+
+This project integrates **LLMs (Groq - LLaMA 3.1)** with structured data to generate SQL dynamically and return **data-backed answers along with interactive graph visualization**.
+
+---
 
 ## 🚀 Overview
 
-This project builds a **Graph-Based Query System** that transforms fragmented business data (Orders, Deliveries, Billing, Products) into a **connected graph** and enables users to query it using **natural language**.
-
-The system uses an **LLM (Groq - LLaMA 3.1)** to dynamically convert user queries into SQL and returns **data-backed answers along with graph visualization**.
+This system converts SAP Order-to-Cash (O2C) data (Orders, Deliveries, Billing, Products) into a **graph-based representation** and allows users to explore relationships using natural language queries.
 
 ---
 
@@ -12,7 +14,7 @@ The system uses an **LLM (Groq - LLaMA 3.1)** to dynamically convert user querie
 
 The system is divided into three layers:
 
-### 1. Data Layer (SQLite)
+### 1️⃣ Data Layer (SQLite)
 
 * Raw JSON data is cleaned and normalized
 * Stored in structured tables:
@@ -24,7 +26,7 @@ The system is divided into three layers:
 
 ---
 
-### 2. Backend (FastAPI)
+### 2️⃣ Backend (FastAPI)
 
 * Accepts natural language queries
 * Uses LLM to generate SQL dynamically
@@ -32,17 +34,17 @@ The system is divided into three layers:
 * Builds graph using NetworkX + PyVis
 * Returns:
 
-  * SQL query
-  * Result
+  * Generated SQL query
+  * Query result
   * Natural language answer
-  * Graph file
+  * Graph visualization
 
 ---
 
-### 3. Frontend (HTML + JavaScript)
+### 3️⃣ Frontend (HTML + JavaScript)
 
-* Simple chat-like interface
-* Displays SQL, results, and answer
+* Chat-like interface
+* Displays SQL, results, and answers
 * Dynamically loads graph visualization
 
 ---
@@ -58,11 +60,12 @@ User Query → LLM → SQL → SQLite → Result → Graph Generation → UI
 * Provider: Groq
 * Model: `llama-3.1-8b-instant`
 * Converts natural language → SQL
-* Prompt engineered to:
 
-  * Restrict schema usage
-  * Output only SQL
-  * Avoid hallucinations
+### Prompt Engineering:
+
+* Restricts schema usage
+* Outputs only SQL
+* Avoids hallucinations
 
 ---
 
@@ -70,21 +73,26 @@ User Query → LLM → SQL → SQLite → Result → Graph Generation → UI
 
 ### Nodes:
 
+* Customers
 * Orders
 * Products
 * Deliveries
 * Billing Documents
+* Journal Entries
 
 ### Edges:
 
+* Customer → Order
 * Order → Product
 * Order → Delivery
 * Delivery → Billing
+* Billing → Journal
 
-Graphs are:
+### Features:
 
-* Generated dynamically per query
-* Highlighted based on query results
+* Graph generated dynamically per query
+* Relevant nodes are highlighted
+* Interactive zoom & drag
 
 ---
 
@@ -101,37 +109,89 @@ Invalid queries return:
 
 ---
 
-## ⚙️ Setup Instructions
+## 📦 Installation
 
 ### 1. Clone Repository
 
 ```bash
-git clone <your-repo-link>
-cd graph-ai-system
+git clone https://github.com/muralivijai64/Graph-Based-Data-Modeling-and-Query-System.git
+cd Graph-Based-Data-Modeling-and-Query-System
 ```
 
-### 2. Backend Setup
+---
+
+### 2. Install Dependencies
 
 ```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Run Server
+---
+
+## 🔐 Environment Variables (API Key Setup)
+
+### Step 1: Create `.env` file inside backend
+
+```
+backend/.env
+```
+
+### Step 2: Add your API key
+
+```
+GROQ_API_KEY=your_api_key_here
+```
+
+⚠️ Important:
+
+* `.env` is ignored by Git
+* Never upload your API key
+
+---
+
+## 🗄️ Dataset Setup
+
+Download the SAP Order-to-Cash dataset and place it locally.
+
+
+---
+
+## ⚙️ Create Database (`data.db`)
+
+Run the following command:
 
 ```bash
+python prepare.py --data_dir //Path of Downloaded Database//
+```
+
+### ✅ What this does:
+
+* Reads raw `.jsonl` files
+* Cleans and processes data
+* Creates `backend/data.db`
+
+---
+
+## ▶️ Run the Application
+
+### 1. Start Backend
+
+```bash
+cd backend
 uvicorn main:app --reload
 ```
 
-### 4. Open UI
+---
+
+### 2. Open Frontend
 
 Open:
 
-```text
+```
 frontend/index.html
 ```
+
+(or use Live Server in VS Code)
 
 ---
 
@@ -153,19 +213,38 @@ frontend/index.html
 
 ---
 
+## 🧠 Tech Stack
+
+* Python
+* FastAPI
+* NetworkX
+* PyVis
+* SQLite
+* Groq API (LLM)
+
+---
+
 ## 🤖 AI Usage
 
 This project was developed using multiple AI tools:
 
-* **ChatGPT**: Backend architecture, debugging, SQL generation logic, graph modeling
+* **ChatGPT**: Backend logic, debugging, graph modeling, system design
 * **Claude**: Frontend UI structuring and HTML improvements
 
 AI was used as an **iterative development assistant** for:
 
 * Designing system architecture
-* Debugging runtime issues (SQLite, FastAPI, threading)
+* Debugging runtime issues
 * Improving prompt engineering
-* Enhancing UI and visualization
+* Enhancing visualization and UI
+
+---
+
+## ⚠️ Notes
+
+* `.env` and `data/` are excluded via `.gitignore`
+* Ensure `data.db` is created before running backend
+* Large datasets are not pushed to GitHub
 
 ---
 
@@ -175,12 +254,28 @@ AI was used as an **iterative development assistant** for:
 * Add semantic search
 * Improve UI with React
 * Add streaming responses
-* Better graph clustering
+* Advanced graph clustering
 
 ---
 
 ## 📌 Conclusion
 
-This project demonstrates how LLMs can be integrated with structured data and graph modeling to create an interactive and explainable query system.
+This project demonstrates how LLMs can be integrated with structured data and graph modeling to create an **interactive, explainable query system**.
 
-It highlights strong architectural thinking, effective AI usage, and practical system design.
+It highlights:
+
+* Strong architectural design
+* Practical AI integration
+* Real-world data modeling
+
+---
+
+## 👨‍💻 Author
+
+Muralitharan S
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a star ⭐ on GitHub!
