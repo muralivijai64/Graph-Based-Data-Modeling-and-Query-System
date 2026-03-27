@@ -1,20 +1,22 @@
+# Graph-Based Data Modeling and Query System
+
 An end-to-end system that transforms fragmented enterprise data into a **connected graph** and enables users to query it using **natural language**.
 
 This project integrates **LLMs (Groq - LLaMA 3.1)** with structured data to generate SQL dynamically and return **data-backed answers along with interactive graph visualization**.
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 This system converts SAP Order-to-Cash (O2C) data (Orders, Deliveries, Billing, Products) into a **graph-based representation** and allows users to explore relationships using natural language queries.
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 The system is divided into three layers:
 
-### 1️⃣ Data Layer (SQLite)
+### 1️. Data Layer (SQLite)
 
 * Raw JSON data is cleaned and normalized
 * Stored in structured tables:
@@ -26,7 +28,7 @@ The system is divided into three layers:
 
 ---
 
-### 2️⃣ Backend (FastAPI)
+### 2️. Backend (FastAPI)
 
 * Accepts natural language queries
 * Uses LLM to generate SQL dynamically
@@ -41,7 +43,7 @@ The system is divided into three layers:
 
 ---
 
-### 3️⃣ Frontend (HTML + JavaScript)
+### 3️. Frontend (HTML + JavaScript)
 
 * Chat-like interface
 * Displays SQL, results, and answers
@@ -49,13 +51,13 @@ The system is divided into three layers:
 
 ---
 
-## 🔁 System Flow
+##  System Flow
 
 User Query → LLM → SQL → SQLite → Result → Graph Generation → UI
 
 ---
 
-## 🧠 LLM Integration
+##  LLM Integration
 
 * Provider: Groq
 * Model: `llama-3.1-8b-instant`
@@ -69,7 +71,7 @@ User Query → LLM → SQL → SQLite → Result → Graph Generation → UI
 
 ---
 
-## 🕸️ Graph Modeling
+##  Graph Modeling
 
 ### Nodes:
 
@@ -96,7 +98,7 @@ User Query → LLM → SQL → SQLite → Result → Graph Generation → UI
 
 ---
 
-## 🛡️ Guardrails
+##  Guardrails
 
 * Only dataset-related queries allowed
 * Keyword filtering:
@@ -109,7 +111,7 @@ Invalid queries return:
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ### 1. Clone Repository
 
@@ -128,7 +130,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🔐 Environment Variables (API Key Setup)
+##  Environment Variables (API Key Setup)
 
 ### Step 1: Create `.env` file inside backend
 
@@ -142,21 +144,21 @@ backend/.env
 GROQ_API_KEY=your_api_key_here
 ```
 
-⚠️ Important:
+Important:
 
 * `.env` is ignored by Git
 * Never upload your API key
 
 ---
 
-## 🗄️ Dataset Setup
+##  Dataset Setup
 
 Download the SAP Order-to-Cash dataset and place it locally.
 
 
 ---
 
-## ⚙️ Create Database (`data.db`)
+##  Create Database (`data.db`)
 
 Run the following command:
 
@@ -164,7 +166,7 @@ Run the following command:
 python prepare.py --data_dir //Path of Downloaded Database//
 ```
 
-### ✅ What this does:
+###  What this does:
 
 * Reads raw `.jsonl` files
 * Cleans and processes data
@@ -172,7 +174,7 @@ python prepare.py --data_dir //Path of Downloaded Database//
 
 ---
 
-## ▶️ Run the Application
+##  Run the Application
 
 ### 1. Start Backend
 
@@ -195,7 +197,7 @@ frontend/index.html
 
 ---
 
-## 📊 Example Queries
+## Example Queries
 
 * top 5 products
 * orders without delivery
@@ -203,7 +205,7 @@ frontend/index.html
 
 ---
 
-## ⭐ Features
+##  Features
 
 * Natural Language → SQL using LLM
 * Dynamic Graph Visualization
@@ -213,7 +215,7 @@ frontend/index.html
 
 ---
 
-## 🧠 Tech Stack
+##  Tech Stack
 
 * Python
 * FastAPI
@@ -224,7 +226,7 @@ frontend/index.html
 
 ---
 
-## 🤖 AI Usage
+##  AI Usage
 
 This project was developed using multiple AI tools:
 
@@ -240,7 +242,7 @@ AI was used as an **iterative development assistant** for:
 
 ---
 
-## ⚠️ Notes
+##  Notes
 
 * `.env` and `data/` are excluded via `.gitignore`
 * Ensure `data.db` is created before running backend
@@ -248,7 +250,7 @@ AI was used as an **iterative development assistant** for:
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 * Replace SQLite with Neo4j (graph DB)
 * Add semantic search
@@ -258,7 +260,7 @@ AI was used as an **iterative development assistant** for:
 
 ---
 
-## 📌 Conclusion
+##  Conclusion
 
 This project demonstrates how LLMs can be integrated with structured data and graph modeling to create an **interactive, explainable query system**.
 
@@ -270,12 +272,12 @@ It highlights:
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 Muralitharan S
 
 ---
 
-## ⭐ Support
+##  Support
 
 If you like this project, give it a star ⭐ on GitHub!
